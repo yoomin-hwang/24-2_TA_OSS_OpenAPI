@@ -23,7 +23,7 @@ function DetailPage() {
         const res = await getRestaurantImgAPI();
         if (res) { // ires가 undefined가 아닐 경우에만 filter 사용
             const images = res.filter((img) => img.RSTR_ID.toString() === id);
-            console.log(images);
+            // console.log(images);
             setRestImage(images);
         } else {
             console.error("Image data is undefined or empty.");
