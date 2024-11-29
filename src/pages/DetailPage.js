@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getRestaurantImgAPI, getRestaurantsAPI } from "../apis/API";
@@ -8,7 +8,7 @@ function DetailPage() {
     const [restaurant, setRestaurant] = useState();
     const [restImage, setRestImage] = useState([]);
 
-    const fetchRestaurant = async () => {
+    const fetchRestaurant = useCallback(async () => {
         try {
             // 식당 정보 가져오기
             const res = await getRestaurantsAPI();
@@ -17,9 +17,9 @@ function DetailPage() {
         } catch (err) {
             console.error(err);
         }
-    };
+    }, [id]);
 
-    const fetchImage = async () => {
+    const fetchImage = useCallback(async () => {
         const res = await getRestaurantImgAPI();
         if (res) { // ires가 undefined가 아닐 경우에만 filter 사용
             const images = res.filter((img) => img.RSTR_ID.toString() === id);
@@ -28,12 +28,12 @@ function DetailPage() {
         } else {
             console.error("Image data is undefined or empty.");
         }
-    };
+    }, [id]);
 
     useEffect(() => {
         fetchRestaurant();
         fetchImage();
-    }, [id]);
+    }, [fetchRestaurant, fetchImage]); 
 
     if (!restaurant) {
         return <p>Loading...</p>;
