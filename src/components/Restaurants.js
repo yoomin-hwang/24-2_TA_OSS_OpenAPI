@@ -9,7 +9,7 @@ function Restaurants () {
     const [restaurantImages, setRestaurantImages] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(""); // 업종 필터 상태
 
-    const categories = ["식육(숯불구이)", "한식", "중국식", "경양식", "호프/통닭", "복어취급", "기타"];
+    const categories = ["한식", "중국식", "일식", "경양식", "식육(숯불구이)", "냉면집", "회집", "복어취급", "호프/통닭", "패스트푸드", "제과점영업", "커피숍", "김밥(도시락)", "기타"];
 
     const getRestaurants = async () => {
         try {
